@@ -1,0 +1,27 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "display-page-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/displayPage/DisplayPageWebPart.js",
+          "manifest": "./src/webparts/displayPage/DisplayPageWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {
+    "jquery": {
+      "path": "node_modules/jquery/dist/jquery.min.js",
+      "globalName": "jQuery"
+    },
+    "axios": {
+      "path": "node_modules/axios/dist/axios.min.js",
+      "globalName": "axios"
+    }
+  },
+  "localizedResources": {
+    "DisplayPageWebPartStrings": "lib/webparts/displayPage/loc/{locale}.js"
+  }
+}

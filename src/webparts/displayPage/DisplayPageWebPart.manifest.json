@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "5b3e2243-7635-442f-a6e6-43883ff45da2",
+  "alias": "DisplayPageWebPart",
+  "componentType": "WebPart",
+
+  "version": "*",
+  "manifestVersion": 2,
+
+  "requiresCustomScript": false,
+
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f11", 
+    "group": { "default": "Other" },
+    "title": { "default": "pagePB" },
+    "description": { "default": "Project details view" },
+    "officeFabricIconFontName": "CustomList",
+    "properties": {
+      "description": "displayPage"
+    }
+  }]
+}
