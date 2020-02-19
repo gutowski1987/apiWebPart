@@ -11,6 +11,12 @@ window.arrUrl.forEach(function(e) {
 });
 window.projectData = window.starts;
 
+window.today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+window.today = dd + '/' + mm + '/' + yyyy;
+
 $(window).ready(
     projectDetails(),
     projectObjective(),
@@ -28,11 +34,11 @@ function projectDetails() {
       headers: {
         'accept': 'application/json;odata=verbose'
       },
-      url: "/sites/ictprojects/_api/web/lists(guid\'e2e2998e-1f81-4c67-82c6-3fd32a22ca13\')/items?SponsorId,Project_x0020_ID,Project_x0020_Status,Gate_x0020_Stage,ICT_x002d_LeadId,ICT_x0020_Workstream,ICT_x0020_Watchlist,Modified&$filter=Project_x0020_ID eq \'" + projectData + "\'",
+      url: "/sites/ictprojects/_api/web/lists(guid\'e2e2998e-1f81-4c67-82c6-3fd32a22ca13\')/items?Title,SponsorId,Project_x0020_ID,Project_x0020_Status,Gate_x0020_Stage,ICT_x002d_LeadId,ICT_x0020_Workstream,ICT_x0020_Watchlist,Modified&$filter=Project_x0020_ID eq \'" + projectData + "\'",
       success: 
     function(data){
           $(data.d.results).each(function(){
-            $('#projectDetails').append("<h2>" + this.Project_x0020_ID + " Portal Change - Project Summary</h2><h3>Project Details</h3><table class=\"" + styles.WithoutBorder + "\"><thead><tr><th>Project Sponsor</th><th>Project Status</th><th>Gate Stage</th><th>ICT Lead</th><th>Workstream</th><th>Watch List</th><th>Last Updated</th></tr></thead><tbody><tr><td id=\"sponsor\"></td><td>" + ifNull(this.Project_x0020_Status) + "</td><td>" + ifNull(this.Gate_x0020_Stage) + "</td><td id=\"ictlead\"></td><td>" + ifNull(this.ICT_x0020_Workstream) + "</td><td>" + ifNull(this.ICT_x0020_Watchlist) + "</td><td>" + changeDate(this.Modified) + "</td></tr></tbody></table>");
+            $('#projectDetails').append("<h2>Project Summary - " + today + "</h2><h2>" + this.Project_x0020_ID + " - " + this.Title + "</h2><h3>Project Details</h3><table class=\"" + styles.WithoutBorder + "\"><thead><tr><th>Project Sponsor</th><th>Project Status</th><th>Gate Stage</th><th>ICT Lead</th><th>Workstream</th><th>Watch List</th><th>Last Updated</th></tr></thead><tbody><tr><td id=\"sponsor\"></td><td>" + ifNull(this.Project_x0020_Status) + "</td><td>" + ifNull(this.Gate_x0020_Stage) + "</td><td id=\"ictlead\"></td><td>" + ifNull(this.ICT_x0020_Workstream) + "</td><td>" + ifNull(this.ICT_x0020_Watchlist) + "</td><td>" + changeDate(this.Modified) + "</td></tr></tbody></table>");
         callPerson(this.SponsorId, 'sponsor');
         callPerson(this.ICT_x002d_LeadId, 'ictlead');
         });
